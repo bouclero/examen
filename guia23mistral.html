@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Trabajo: Política y Gestión Informatizada de Stock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tab:hover {
+            background-color: #555;
+        }
+        .content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        .content.active {
+            display: block;
+        }
+        .check-box {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 10px;
+        }
+        .feedback {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+    </style>
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('content-' + tabId).classList.add('active');
+        }
+
+        function checkAnswer(questionId, correctAnswer) {
+            const userAnswer = document.querySelector(`input[name="${questionId}"]:checked`).value;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            if (userAnswer === correctAnswer) {
+                feedback.innerHTML = 'Correcto! ✅';
+                feedback.className = 'correct';
+            } else {
+                feedback.innerHTML = `Incorrecto. Revisa el capítulo correspondiente. ❌`;
+                feedback.className = 'feedback';
+            }
+        }
+
+        function calculateScore(day) {
+            const questions = document.querySelectorAll(`#content-day${day} .question`);
+            let correctCount = 0;
+            questions.forEach(question => {
+                const feedback = question.querySelector('.feedback');
+                if (feedback.className === 'correct') {
+                    correctCount++;
+                }
+            });
+            const totalQuestions = questions.length;
+            const percentage = (correctCount / totalQuestions) * 100;
+            document.getElementById(`score-day${day}`).innerText = `Porcentaje de aciertos: ${percentage.toFixed(2)}%`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab active" id="day1" onclick="showTab('day1')">Día 1</div>
+            <div class="tab" id="day2" onclick="showTab('day2')">Día 2</div>
+            <div class="tab" id="day3" onclick="showTab('day3')">Día 3</div>
+            <div class="tab" id="day4" onclick="showTab('day4')">Día 4</div>
+            <div class="tab" id="day5" onclick="showTab('day5')">Día 5</div>
+            <div class="tab" id="day6" onclick="showTab('day6')">Día 6</div>
+            <div class="tab" id="day7" onclick="showTab('day7')">Día 7</div>
+            <div class="tab" id="day8" onclick="showTab('day8')">Día 8</div>
+            <div class="tab" id="day9" onclick="showTab('day9')">Día 9</div>
+            <div class="tab" id="day10" onclick="showTab('day10')">Día 10</div>
+            <div class="tab" id="day11" onclick="showTab('day11')">Día 11</div>
+            <div class="tab" id="day12" onclick="showTab('day12')">Día 12</div>
+        </div>
+
+        <!-- Día 1 -->
+        <div class="content active" id="content-day1">
+            <h2>Día 1: Introducción a la Gestión de Stocks</h2>
+            <p><strong>Resumen:</strong> La gestión de stocks es una disciplina que planifica, regula y supervisa el flujo de bienes en un inventario. Su objetivo es garantizar que la empresa disponga de los productos necesarios al menor coste posible. Los objetivos concretos incluyen asegurar un buen nivel de stock, aumentar la eficiencia, flexibilidad, satisfacción del cliente, mejorar la toma de decisiones y tener datos exactos del movimiento de existencias.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Tipos de stocks: muerto, cíclico, mínimo, máximo, de seguridad, sobrante.</li>
+                    <li>Aprovisionamiento: justo a tiempo, sincronizado con producción, de stock de seguridad.</li>
+                    <li>Cálculo de niveles de stock: Modelo de Wilson (EOQ).</li>
+                    <li>Parámetros básicos: tiempo de entrega, stock de seguridad, rotura de stock, punto de pedido, stock máximo, EOQ, tasa de rotación de existencias.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day1">
+                <label for="check-day1">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de stocks se centra en planificar, regular y supervisar el flujo de bienes en un inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q1" value="true" onclick="checkAnswer('q1', 'true')"> Verdadero
+                <input type="radio" name="q1" value="false" onclick="checkAnswer('q1', 'true')"> Falso
+                <div id="feedback-q1" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El stock mínimo determina el nivel mínimo de existencias para evitar perder ventas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q2" value="true" onclick="checkAnswer('q2', 'true')"> Verdadero
+                <input type="radio" name="q2" value="false" onclick="checkAnswer('q2', 'true')"> Falso
+                <div id="feedback-q2" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El aprovisionamiento justo a tiempo reduce los costos de almacenamiento pero aumenta el riesgo de desabastecimiento. ¿Verdadero o falso?</p>
+                <input type="radio" name="q3" value="true" onclick="checkAnswer('q3', 'true')"> Verdadero
+                <input type="radio" name="q3" value="false" onclick="checkAnswer('q3', 'true')"> Falso
+                <div id="feedback-q3" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. El Modelo de Wilson (EOQ) ayuda a calcular la cantidad óptima de pedido. ¿Verdadero o falso?</p>
+                <input type="radio" name="q4" value="true" onclick="checkAnswer('q4', 'true')"> Verdadero
+                <input type="radio" name="q4" value="false" onclick="checkAnswer('q4', 'true')"> Falso
+                <div id="feedback-q4" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación de existencias mide cuántas veces se ha vendido el inventario en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q5" value="true" onclick="checkAnswer('q5', 'true')"> Verdadero
+                <input type="radio" name="q5" value="false" onclick="checkAnswer('q5', 'true')"> Falso
+                <div id="feedback-q5" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El stock de seguridad se utiliza para hacer frente a imprevistos como repuntes en la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q6" value="true" onclick="checkAnswer('q6', 'true')"> Verdadero
+                <input type="radio" name="q6" value="false" onclick="checkAnswer('q6', 'true')"> Falso
+                <div id="feedback-q6" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El punto de pedido es el momento en el que se debe realizar un pedido para evitar la rotura de stock. ¿Verdadero o falso?</p>
+                <input type="radio" name="q7" value="true" onclick="checkAnswer('q7', 'true')"> Verdadero
+                <input type="radio" name="q7" value="false" onclick="checkAnswer('q7', 'true')"> Falso
+                <div id="feedback-q7" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El stock máximo es el volumen exacto de mercancía que puede albergar un almacén sin incurrir en sobrecostes. ¿Verdadero o falso?</p>
+                <input type="radio" name="q8" value="true" onclick="checkAnswer('q8', 'true')"> Verdadero
+                <input type="radio" name="q8" value="false" onclick="checkAnswer('q8', 'true')"> Falso
+                <div id="feedback-q8" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. La gestión de stocks ayuda a mejorar la satisfacción del cliente. ¿Verdadero o falso?</p>
+                <input type="radio" name="q9" value="true" onclick="checkAnswer('q9', 'true')"> Verdadero
+                <input type="radio" name="q9" value="false" onclick="checkAnswer('q9', 'true')"> Falso
+                <div id="feedback-q9" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. El stock cíclico se clasifica en función de la demanda y puede variar según la industria o la época de consumo. ¿Verdadero o falso?</p>
+                <input type="radio" name="q10" value="true" onclick="checkAnswer('q10', 'true')"> Verdadero
+                <input type="radio" name="q10" value="false" onclick="checkAnswer('q10', 'true')"> Falso
+                <div id="feedback-q10" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(1)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day1"></p>
+        </div>
+
+        <!-- Día 2 -->
+        <div class="content" id="content-day2">
+            <h2>Día 2: Sistemas de Gestión de Stocks</h2>
+            <p><strong>Resumen:</strong> Los sistemas de gestión de stocks abarcan todas las operaciones dedicadas a regular el flujo de mercancías en una empresa. Los sistemas de reaprovisionamiento pueden ser continuos o periódicos. El punto de pedido y el lote económico de pedido (EOQ) son herramientas clave para optimizar los costos de inventario. La Matriz de Kraljic ayuda a clasificar los productos según su impacto financiero y complejidad de suministro.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Reaprovisionamiento: continuo vs. periódico.</li>
+                    <li>Punto de pedido: fórmula y cálculo.</li>
+                    <li>EOQ: fórmula, ventajas y desventajas.</li>
+                    <li>Matriz de Kraljic: clasificación de productos.</li>
+                    <li>Índices de control: tasa de rotación y tasa de cobertura.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day2">
+                <label for="check-day2">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. El reaprovisionamiento continuo actualiza la información del stock en tiempo real. ¿Verdadero o falso?</p>
+                <input type="radio" name="q11" value="true" onclick="checkAnswer('q11', 'true')"> Verdadero
+                <input type="radio" name="q11" value="false" onclick="checkAnswer('q11', 'true')"> Falso
+                <div id="feedback-q11" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El punto de pedido se calcula sumando el stock de seguridad y el consumo medio multiplicado por el lead time. ¿Verdadero o falso?</p>
+                <input type="radio" name="q12" value="true" onclick="checkAnswer('q12', 'true')"> Verdadero
+                <input type="radio" name="q12" value="false" onclick="checkAnswer('q12', 'true')"> Falso
+                <div id="feedback-q12" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El EOQ es un modelo que ayuda a reducir los costos de inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q13" value="true" onclick="checkAnswer('q13', 'true')"> Verdadero
+                <input type="radio" name="q13" value="false" onclick="checkAnswer('q13', 'true')"> Falso
+                <div id="feedback-q13" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La Matriz de Kraljic clasifica los productos según su impacto financiero y complejidad de suministro. ¿Verdadero o falso?</p>
+                <input type="radio" name="q14" value="true" onclick="checkAnswer('q14', 'true')"> Verdadero
+                <input type="radio" name="q14" value="false" onclick="checkAnswer('q14', 'true')"> Falso
+                <div id="feedback-q14" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación mide la velocidad en la que se repone el stock en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q15" value="true" onclick="checkAnswer('q15', 'true')"> Verdadero
+                <input type="radio" name="q15" value="false" onclick="checkAnswer('q15', 'true')"> Falso
+                <div id="feedback-q15" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El EOQ tiene limitaciones porque asume que la demanda y los costos son constantes. ¿Verdadero o falso?</p>
+                <input type="radio" name="q16" value="true" onclick="checkAnswer('q16', 'true')"> Verdadero
+                <input type="radio" name="q16" value="false" onclick="checkAnswer('q16', 'true')"> Falso
+                <div id="feedback-q16" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. La Matriz de Kraljic ayuda a establecer la estrategia de aprovisionamiento. ¿Verdadero o falso?</p>
+                <input type="radio" name="q17" value="true" onclick="checkAnswer('q17', 'true')"> Verdadero
+                <input type="radio" name="q17" value="false" onclick="checkAnswer('q17', 'true')"> Falso
+                <div id="feedback-q17" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. La tasa de cobertura supone una visión global del inventario a diario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q18" value="true" onclick="checkAnswer('q18', 'true')"> Verdadero
+                <input type="radio" name="q18" value="false" onclick="checkAnswer('q18', 'true')"> Falso
+                <div id="feedback-q18" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El reaprovisionamiento periódico revisa el stock a intervalos constantes de tiempo. ¿Verdadero o falso?</p>
+                <input type="radio" name="q19" value="true" onclick="checkAnswer('q19', 'true')"> Verdadero
+                <input type="radio" name="q19" value="false" onclick="checkAnswer('q19', 'true')"> Falso
+                <div id="feedback-q19" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. El EOQ no considera descuentos por volumen o tamaño de pedido. ¿Verdadero o falso?</p>
+                <input type="radio" name="q20" value="true" onclick="checkAnswer('q20', 'true')"> Verdadero
+                <input type="radio" name="q20" value="false" onclick="checkAnswer('q20', 'true')"> Falso
+                <div id="feedback-q20" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(2)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day2"></p>
+        </div>
+
+        <!-- Día 3 -->
+        <div class="content" id="content-day3">
+            <h2>Día 3: Inventarios</h2>
+            <p><strong>Resumen:</strong> Un inventario es un documento que registra todos los bienes tangibles e intangibles de una empresa. Los inventarios permiten conocer la fluctuación de artículos y ayudan a tomar decisiones sobre proveedores y existencias. Los métodos de control de inventario incluyen el análisis ABC, LIFO, FIFO, seguimiento de lotes y stock de seguridad.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Tipos de inventario: físico e intangible.</li>
+                    <li>Métodos de control: análisis ABC, LIFO, FIFO, seguimiento de lotes, stock de seguridad.</li>
+                    <li>Valoración de inventarios: PEPS (FIFO), UEPS (LIFO), promedio ponderado.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day3">
+                <label for="check-day3">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. El inventario físico verifica las existencias de materiales y equipos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q21" value="true" onclick="checkAnswer('q21', 'true')"> Verdadero
+                <input type="radio" name="q21" value="false" onclick="checkAnswer('q21', 'true')"> Falso
+                <div id="feedback-q21" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El análisis ABC clasifica las existencias en función de su importancia y volumen de ventas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q22" value="true" onclick="checkAnswer('q22', 'true')"> Verdadero
+                <input type="radio" name="q22" value="false" onclick="checkAnswer('q22', 'true')"> Falso
+                <div id="feedback-q22" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El método LIFO distribuye primero el lote más reciente de artículos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q23" value="true" onclick="checkAnswer('q23', 'true')"> Verdadero
+                <input type="radio" name="q23" value="false" onclick="checkAnswer('q23', 'true')"> Falso
+                <div id="feedback-q23" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. El método FIFO da prioridad a las existencias más antiguas para su procesamiento y envío. ¿Verdadero o falso?</p>
+                <input type="radio" name="q24" value="true" onclick="checkAnswer('q24', 'true')"> Verdadero
+                <input type="radio" name="q24" value="false" onclick="checkAnswer('q24', 'true')"> Falso
+                <div id="feedback-q24" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. El stock de seguridad actúa como una red de seguridad en caso de que la demanda supere la cantidad prevista. ¿Verdadero o falso?</p>
+                <input type="radio" name="q25" value="true" onclick="checkAnswer('q25', 'true')"> Verdadero
+                <input type="radio" name="q25" value="false" onclick="checkAnswer('q25', 'true')"> Falso
+                <div id="feedback-q25" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El inventario de bienes intangibles incluye patentes, software y marcas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q26" value="true" onclick="checkAnswer('q26', 'true')"> Verdadero
+                <input type="radio" name="q26" value="false" onclick="checkAnswer('q26', 'true')"> Falso
+                <div id="feedback-q26" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El método PEPS (FIFO) plantea que los primeros productos que se adquieren son los primeros que se venden. ¿Verdadero o falso?</p>
+                <input type="radio" name="q27" value="true" onclick="checkAnswer('q27', 'true')"> Verdadero
+                <input type="radio" name="q27" value="false" onclick="checkAnswer('q27', 'true')"> Falso
+                <div id="feedback-q27" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El método UEPS (LIFO) no es aceptado por el Plan General Contable en España. ¿Verdadero o falso?</p>
+                <input type="radio" name="q28" value="true" onclick="checkAnswer('q28', 'true')"> Verdadero
+                <input type="radio" name="q28" value="false" onclick="checkAnswer('q28', 'true')"> Falso
+                <div id="feedback-q28" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El seguimiento de lotes agrupa las mercancías de la misma fecha de producción. ¿Verdadero o falso?</p>
+                <input type="radio" name="q29" value="true" onclick="checkAnswer('q29', 'true')"> Verdadero
+                <input type="radio" name="q29" value="false" onclick="checkAnswer('q29', 'true')"> Falso
+                <div id="feedback-q29" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. El inventario permite corregir posibles errores en los registros de entradas y salidas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q30" value="true" onclick="checkAnswer('q30', 'true')"> Verdadero
+                <input type="radio" name="q30" value="false" onclick="checkAnswer('q30', 'true')"> Falso
+                <div id="feedback-q30" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(3)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day3"></p>
+        </div>
+
+        <!-- Día 4 -->
+        <div class="content" id="content-day4">
+            <h2>Día 4: Factores de Aprovisionamiento</h2>
+            <p><strong>Resumen:</strong> El aprovisionamiento logístico comienza con la adquisición de materias primas necesarias para producir bienes. La gestión de aprovisionamiento debe asegurar que haya suficiente cantidad de materias y productos en stock. Los factores clave incluyen la gestión de compras, almacenamiento y gestión de inventarios.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Gestión de compras: precio, calidad y condiciones.</li>
+                    <li>Almacenamiento: espacio acondicionado y sistema organizativo.</li>
+                    <li>Gestión de inventarios: control de existencias para cubrir necesidades productivas y comerciales.</li>
+                    <li>Costes: fijos, variables y totales.</li>
+                    <li>Modelo de Wilson: cálculo del lote económico de pedido.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day4">
+                <label for="check-day4">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de compras incluye la adquisición de productos que permiten llevar a cabo la actividad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q31" value="true" onclick="checkAnswer('q31', 'true')"> Verdadero
+                <input type="radio" name="q31" value="false" onclick="checkAnswer('q31', 'true')"> Falso
+                <div id="feedback-q31" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El almacenamiento requiere un espacio acondicionado y un sistema organizativo para clasificar los productos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q32" value="true" onclick="checkAnswer('q32', 'true')"> Verdadero
+                <input type="radio" name="q32" value="false" onclick="checkAnswer('q32', 'true')"> Falso
+                <div id="feedback-q32" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. La gestión de inventarios es clave para conocer la cantidad de existencias en el almacén. ¿Verdadero o falso?</p>
+                <input type="radio" name="q33" value="true" onclick="checkAnswer('q33', 'true')"> Verdadero
+                <input type="radio" name="q33" value="false" onclick="checkAnswer('q33', 'true')"> Falso
+                <div id="feedback-q33" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. Los costes fijos permanecen constantes durante un período de tiempo determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q34" value="true" onclick="checkAnswer('q34', 'true')"> Verdadero
+                <input type="radio" name="q34" value="false" onclick="checkAnswer('q34', 'true')"> Falso
+                <div id="feedback-q34" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. El Modelo de Wilson ayuda a calcular el tamaño óptimo del pedido a realizar. ¿Verdadero o falso?</p>
+                <input type="radio" name="q35" value="true" onclick="checkAnswer('q35', 'true')"> Verdadero
+                <input type="radio" name="q35" value="false" onclick="checkAnswer('q35', 'true')"> Falso
+                <div id="feedback-q35" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. Los costes variables varían en función del volumen de producción. ¿Verdadero o falso?</p>
+                <input type="radio" name="q36" value="true" onclick="checkAnswer('q36', 'true')"> Verdadero
+                <input type="radio" name="q36" value="false" onclick="checkAnswer('q36', 'true')"> Falso
+                <div id="feedback-q36" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. La falta de stock puede provocar la pérdida de clientes. ¿Verdadero o falso?</p>
+                <input type="radio" name="q37" value="true" onclick="checkAnswer('q37', 'true')"> Verdadero
+                <input type="radio" name="q37" value="false" onclick="checkAnswer('q37', 'true')"> Falso
+                <div id="feedback-q37" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El excedente de stock puede reportar pérdidas para la compañía. ¿Verdadero o falso?</p>
+                <input type="radio" name="q38" value="true" onclick="checkAnswer('q38', 'true')"> Verdadero
+                <input type="radio" name="q38" value="false" onclick="checkAnswer('q38', 'true')"> Falso
+                <div id="feedback-q38" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. Los costes totales se obtienen sumando los costes fijos y variables. ¿Verdadero o falso?</p>
+                <input type="radio" name="q39" value="true" onclick="checkAnswer('q39', 'true')"> Verdadero
+                <input type="radio" name="q39" value="false" onclick="checkAnswer('q39', 'true')"> Falso
+                <div id="feedback-q39" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. El Modelo de Wilson asume que la demanda del producto es constante todo el año. ¿Verdadero o falso?</p>
+                <input type="radio" name="q40" value="true" onclick="checkAnswer('q40', 'true')"> Verdadero
+                <input type="radio" name="q40" value="false" onclick="checkAnswer('q40', 'true')"> Falso
+                <div id="feedback-q40" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(4)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day4"></p>
+        </div>
+
+        <!-- Día 5 -->
+        <div class="content" id="content-day5">
+            <h2>Día 5: Costes</h2>
+            <p><strong>Resumen:</strong> Los costes en la gestión de stocks incluyen costes fijos y variables. Los costes fijos permanecen constantes independientemente del volumen de producción, mientras que los costes variables cambian en función del volumen de producción. El control de costes es esencial para optimizar la gestión de inventarios y mejorar la rentabilidad.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Costes fijos: no varían con el volumen de producción.</li>
+                    <li>Costes variables: varían con el volumen de producción.</li>
+                    <li>Costes totales: suma de costes fijos y variables.</li>
+                    <li>Modelo de Wilson: cálculo del lote económico de pedido.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day5">
+                <label for="check-day5">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. Los costes fijos permanecen constantes independientemente del volumen de producción. ¿Verdadero o falso?</p>
+                <input type="radio" name="q41" value="true" onclick="checkAnswer('q41', 'true')"> Verdadero
+                <input type="radio" name="q41" value="false" onclick="checkAnswer('q41', 'true')"> Falso
+                <div id="feedback-q41" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. Los costes variables cambian en función del volumen de producción. ¿Verdadero o falso?</p>
+                <input type="radio" name="q42" value="true" onclick="checkAnswer('q42', 'true')"> Verdadero
+                <input type="radio" name="q42" value="false" onclick="checkAnswer('q42', 'true')"> Falso
+                <div id="feedback-q42" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. Los costes totales se obtienen sumando los costes fijos y variables. ¿Verdadero o falso?</p>
+                <input type="radio" name="q43" value="true" onclick="checkAnswer('q43', 'true')"> Verdadero
+                <input type="radio" name="q43" value="false" onclick="checkAnswer('q43', 'true')"> Falso
+                <div id="feedback-q43" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. El Modelo de Wilson ayuda a calcular el tamaño óptimo del pedido a realizar. ¿Verdadero o falso?</p>
+                <input type="radio" name="q44" value="true" onclick="checkAnswer('q44', 'true')"> Verdadero
+                <input type="radio" name="q44" value="false" onclick="checkAnswer('q44', 'true')"> Falso
+                <div id="feedback-q44" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. El control de costes es esencial para optimizar la gestión de inventarios. ¿Verdadero o falso?</p>
+                <input type="radio" name="q45" value="true" onclick="checkAnswer('q45', 'true')"> Verdadero
+                <input type="radio" name="q45" value="false" onclick="checkAnswer('q45', 'true')"> Falso
+                <div id="feedback-q45" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. Los costes fijos incluyen el alquiler del almacén y los salarios del personal. ¿Verdadero o falso?</p>
+                <input type="radio" name="q46" value="true" onclick="checkAnswer('q46', 'true')"> Verdadero
+                <input type="radio" name="q46" value="false" onclick="checkAnswer('q46', 'true')"> Falso
+                <div id="feedback-q46" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. Los costes variables incluyen el costo de las materias primas y la mano de obra directa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q47" value="true" onclick="checkAnswer('q47', 'true')"> Verdadero
+                <input type="radio" name="q47" value="false" onclick="checkAnswer('q47', 'true')"> Falso
+                <div id="feedback-q47" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El Modelo de Wilson asume que la demanda del producto es constante todo el año. ¿Verdadero o falso?</p>
+                <input type="radio" name="q48" value="true" onclick="checkAnswer('q48', 'true')"> Verdadero
+                <input type="radio" name="q48" value="false" onclick="checkAnswer('q48', 'true')"> Falso
+                <div id="feedback-q48" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. La optimización de costes puede mejorar la rentabilidad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q49" value="true" onclick="checkAnswer('q49', 'true')"> Verdadero
+                <input type="radio" name="q49" value="false" onclick="checkAnswer('q49', 'true')"> Falso
+                <div id="feedback-q49" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. Los costes totales aumentan a medida que aumenta el volumen de producción. ¿Verdadero o falso?</p>
+                <input type="radio" name="q50" value="true" onclick="checkAnswer('q50', 'true')"> Verdadero
+                <input type="radio" name="q50" value="false" onclick="checkAnswer('q50', 'true')"> Falso
+                <div id="feedback-q50" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(5)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day5"></p>
+        </div>
+
+        <!-- Día 6 -->
+        <div class="content" id="content-day6">
+            <h2>Día 6: Previsión y Planificación</h2>
+            <p><strong>Resumen:</strong> La previsión de la demanda es esencial para calcular el volumen de ventas de cada producto en un período futuro. Esto permite planificar las compras necesarias para mantener el stock adecuado. Los factores que afectan la previsión incluyen la época del año, la evolución de ventas del producto, la estrategia de la empresa y otros factores externos.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Previsión de la demanda: cálculo del volumen de ventas futuras.</li>
+                    <li>Factores que afectan la previsión: época del año, evolución de ventas, estrategia de la empresa, factores externos.</li>
+                    <li>Planificación de compras: asegurar el stock adecuado.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day6">
+                <label for="check-day6">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La previsión de la demanda es esencial para calcular el volumen de ventas futuras. ¿Verdadero o falso?</p>
+                <input type="radio" name="q51" value="true" onclick="checkAnswer('q51', 'true')"> Verdadero
+                <input type="radio" name="q51" value="false" onclick="checkAnswer('q51', 'true')"> Falso
+                <div id="feedback-q51" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. La época del año puede afectar la previsión de la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q52" value="true" onclick="checkAnswer('q52', 'true')"> Verdadero
+                <input type="radio" name="q52" value="false" onclick="checkAnswer('q52', 'true')"> Falso
+                <div id="feedback-q52" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. La evolución de ventas del producto es un factor importante para la previsión de la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q53" value="true" onclick="checkAnswer('q53', 'true')"> Verdadero
+                <input type="radio" name="q53" value="false" onclick="checkAnswer('q53', 'true')"> Falso
+                <div id="feedback-q53" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La estrategia de la empresa puede influir en la previsión de la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q54" value="true" onclick="checkAnswer('q54', 'true')"> Verdadero
+                <input type="radio" name="q54" value="false" onclick="checkAnswer('q54', 'true')"> Falso
+                <div id="feedback-q54" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La planificación de compras asegura el stock adecuado para cubrir la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q55" value="true" onclick="checkAnswer('q55', 'true')"> Verdadero
+                <input type="radio" name="q55" value="false" onclick="checkAnswer('q55', 'true')"> Falso
+                <div id="feedback-q55" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. Los factores externos pueden afectar la previsión de la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q56" value="true" onclick="checkAnswer('q56', 'true')"> Verdadero
+                <input type="radio" name="q56" value="false" onclick="checkAnswer('q56', 'true')"> Falso
+                <div id="feedback-q56" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. La previsión de la demanda ayuda a planificar las compras necesarias. ¿Verdadero o falso?</p>
+                <input type="radio" name="q57" value="true" onclick="checkAnswer('q57', 'true')"> Verdadero
+                <input type="radio" name="q57" value="false" onclick="checkAnswer('q57', 'true')"> Falso
+                <div id="feedback-q57" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. La evolución del mercado es un factor externo que puede afectar la previsión de la demanda. ¿Verdadero o falso?</p>
+                <input type="radio" name="q58" value="true" onclick="checkAnswer('q58', 'true')"> Verdadero
+                <input type="radio" name="q58" value="false" onclick="checkAnswer('q58', 'true')"> Falso
+                <div id="feedback-q58" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. La previsión de la demanda permite conocer la cantidad de existencias necesarias. ¿Verdadero o falso?</p>
+                <input type="radio" name="q59" value="true" onclick="checkAnswer('q59', 'true')"> Verdadero
+                <input type="radio" name="q59" value="false" onclick="checkAnswer('q59', 'true')"> Falso
+                <div id="feedback-q59" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La planificación de compras es esencial para mantener el stock adecuado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q60" value="true" onclick="checkAnswer('q60', 'true')"> Verdadero
+                <input type="radio" name="q60" value="false" onclick="checkAnswer('q60', 'true')"> Falso
+                <div id="feedback-q60" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(6)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day6"></p>
+        </div>
+
+        <!-- Día 7 -->
+        <div class="content" id="content-day7">
+            <h2>Día 7: Gestión Informatizada</h2>
+            <p><strong>Resumen:</strong> La gestión informatizada de stocks utiliza sistemas informáticos para optimizar el control de inventarios. Los sistemas de gestión de almacén (SGA) permiten automatizar procesos, mejorar la eficiencia y reducir errores. Los principales sistemas incluyen SAP y Excel, que ayudan a llevar un control detallado de las existencias.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Sistemas de gestión de almacén (SGA): automatización de procesos.</li>
+                    <li>SAP: software para la gestión de recursos empresariales.</li>
+                    <li>Excel: hoja de cálculo para la gestión de inventarios.</li>
+                    <li>Ventajas: ahorro de costes, mejora en el servicio, ahorro de tiempo, reducción de errores.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day7">
+                <label for="check-day7">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. Los sistemas de gestión de almacén (SGA) permiten automatizar procesos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q61" value="true" onclick="checkAnswer('q61', 'true')"> Verdadero
+                <input type="radio" name="q61" value="false" onclick="checkAnswer('q61', 'true')"> Falso
+                <div id="feedback-q61" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. SAP es un software para la gestión de recursos empresariales. ¿Verdadero o falso?</p>
+                <input type="radio" name="q62" value="true" onclick="checkAnswer('q62', 'true')"> Verdadero
+                <input type="radio" name="q62" value="false" onclick="checkAnswer('q62', 'true')"> Falso
+                <div id="feedback-q62" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. Excel es una hoja de cálculo para la gestión de inventarios. ¿Verdadero o falso?</p>
+                <input type="radio" name="q63" value="true" onclick="checkAnswer('q63', 'true')"> Verdadero
+                <input type="radio" name="q63" value="false" onclick="checkAnswer('q63', 'true')"> Falso
+                <div id="feedback-q63" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La gestión informatizada de stocks mejora la eficiencia y reduce errores. ¿Verdadero o falso?</p>
+                <input type="radio" name="q64" value="true" onclick="checkAnswer('q64', 'true')"> Verdadero
+                <input type="radio" name="q64" value="false" onclick="checkAnswer('q64', 'true')"> Falso
+                <div id="feedback-q64" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. Los sistemas de gestión de almacén (SGA) permiten llevar un control detallado de las existencias. ¿Verdadero o falso?</p>
+                <input type="radio" name="q65" value="true" onclick="checkAnswer('q65', 'true')"> Verdadero
+                <input type="radio" name="q65" value="false" onclick="checkAnswer('q65', 'true')"> Falso
+                <div id="feedback-q65" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. SAP ayuda a administrar recursos humanos, logísticos, financieros y productivos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q66" value="true" onclick="checkAnswer('q66', 'true')"> Verdadero
+                <input type="radio" name="q66" value="false" onclick="checkAnswer('q66', 'true')"> Falso
+                <div id="feedback-q66" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. Excel permite realizar un inventario y modificar plantillas predefinidas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q67" value="true" onclick="checkAnswer('q67', 'true')"> Verdadero
+                <input type="radio" name="q67" value="false" onclick="checkAnswer('q67', 'true')"> Falso
+                <div id="feedback-q67" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. La gestión informatizada de stocks permite ahorrar costes y tiempo. ¿Verdadero o falso?</p>
+                <input type="radio" name="q68" value="true" onclick="checkAnswer('q68', 'true')"> Verdadero
+                <input type="radio" name="q68" value="false" onclick="checkAnswer('q68', 'true')"> Falso
+                <div id="feedback-q68" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. Los sistemas de gestión de almacén (SGA) ayudan a minimizar los robos o mermas. ¿Verdadero o falso?</p>
+                <input type="radio" name="q69" value="true" onclick="checkAnswer('q69', 'true')"> Verdadero
+                <input type="radio" name="q69" value="false" onclick="checkAnswer('q69', 'true')"> Falso
+                <div id="feedback-q69" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La gestión informatizada de stocks permite tener una estrategia organizativa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q70" value="true" onclick="checkAnswer('q70', 'true')"> Verdadero
+                <input type="radio" name="q70" value="false" onclick="checkAnswer('q70', 'true')"> Falso
+                <div id="feedback-q70" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(7)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day7"></p>
+        </div>
+
+        <!-- Día 8 -->
+        <div class="content" id="content-day8">
+            <h2>Día 8: Ficheros Maestros</h2>
+            <p><strong>Resumen:</strong> Los ficheros maestros son registros que contienen información esencial sobre los productos, proveedores y clientes. Estos ficheros son fundamentales para la gestión de inventarios, ya que permiten llevar un control detallado de las existencias y facilitan la toma de decisiones.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Ficheros maestros: información sobre productos, proveedores y clientes.</li>
+                    <li>Control de inventarios: registro detallado de existencias.</li>
+                    <li>Toma de decisiones: facilita la gestión de inventarios.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day8">
+                <label for="check-day8">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. Los ficheros maestros contienen información esencial sobre productos, proveedores y clientes. ¿Verdadero o falso?</p>
+                <input type="radio" name="q71" value="true" onclick="checkAnswer('q71', 'true')"> Verdadero
+                <input type="radio" name="q71" value="false" onclick="checkAnswer('q71', 'true')"> Falso
+                <div id="feedback-q71" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. Los ficheros maestros son fundamentales para la gestión de inventarios. ¿Verdadero o falso?</p>
+                <input type="radio" name="q72" value="true" onclick="checkAnswer('q72', 'true')"> Verdadero
+                <input type="radio" name="q72" value="false" onclick="checkAnswer('q72', 'true')"> Falso
+                <div id="feedback-q72" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. Los ficheros maestros permiten llevar un control detallado de las existencias. ¿Verdadero o falso?</p>
+                <input type="radio" name="q73" value="true" onclick="checkAnswer('q73', 'true')"> Verdadero
+                <input type="radio" name="q73" value="false" onclick="checkAnswer('q73', 'true')"> Falso
+                <div id="feedback-q73" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. Los ficheros maestros facilitan la toma de decisiones en la gestión de inventarios. ¿Verdadero o falso?</p>
+                <input type="radio" name="q74" value="true" onclick="checkAnswer('q74', 'true')"> Verdadero
+                <input type="radio" name="q74" value="false" onclick="checkAnswer('q74', 'true')"> Falso
+                <div id="feedback-q74" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La información en los ficheros maestros incluye datos sobre proveedores. ¿Verdadero o falso?</p>
+                <input type="radio" name="q75" value="true" onclick="checkAnswer('q75', 'true')"> Verdadero
+                <input type="radio" name="q75" value="false" onclick="checkAnswer('q75', 'true')"> Falso
+                <div id="feedback-q75" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. Los ficheros maestros ayudan a llevar un registro detallado de las existencias. ¿Verdadero o falso?</p>
+                <input type="radio" name="q76" value="true" onclick="checkAnswer('q76', 'true')"> Verdadero
+                <input type="radio" name="q76" value="false" onclick="checkAnswer('q76', 'true')"> Falso
+                <div id="feedback-q76" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. La gestión de inventarios se facilita con la información de los ficheros maestros. ¿Verdadero o falso?</p>
+                <input type="radio" name="q77" value="true" onclick="checkAnswer('q77', 'true')"> Verdadero
+                <input type="radio" name="q77" value="false" onclick="checkAnswer('q77', 'true')"> Falso
+                <div id="feedback-q77" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. Los ficheros maestros contienen información sobre clientes. ¿Verdadero o falso?</p>
+                <input type="radio" name="q78" value="true" onclick="checkAnswer('q78', 'true')"> Verdadero
+                <input type="radio" name="q78" value="false" onclick="checkAnswer('q78', 'true')"> Falso
+                <div id="feedback-q78" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. Los ficheros maestros son esenciales para la gestión de inventarios. ¿Verdadero o falso?</p>
+                <input type="radio" name="q79" value="true" onclick="checkAnswer('q79', 'true')"> Verdadero
+                <input type="radio" name="q79" value="false" onclick="checkAnswer('q79', 'true')"> Falso
+                <div id="feedback-q79" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La toma de decisiones en la gestión de inventarios se facilita con los ficheros maestros. ¿Verdadero o falso?</p>
+                <input type="radio" name="q80" value="true" onclick="checkAnswer('q80', 'true')"> Verdadero
+                <input type="radio" name="q80" value="false" onclick="checkAnswer('q80', 'true')"> Falso
+                <div id="feedback-q80" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(8)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day8"></p>
+        </div>
+
+        <!-- Día 9 -->
+        <div class="content" id="content-day9">
+            <h2>Día 9: Repaso y Consolidación</h2>
+            <p><strong>Resumen:</strong> Este día se dedicará a repasar y consolidar los conceptos aprendidos durante los días anteriores. Se revisarán los aspectos clave de la gestión de stocks, sistemas de gestión, inventarios, factores de aprovisionamiento, costes, previsión y planificación, gestión informatizada y ficheros maestros.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Repaso de conceptos clave.</li>
+                    <li>Consolidación de conocimientos.</li>
+                    <li>Revisión de ejercicios y preguntas.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day9">
+                <label for="check-day9">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de stocks es una disciplina que planifica, regula y supervisa el flujo de bienes en un inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q81" value="true" onclick="checkAnswer('q81', 'true')"> Verdadero
+                <input type="radio" name="q81" value="false" onclick="checkAnswer('q81', 'true')"> Falso
+                <div id="feedback-q81" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El punto de pedido se calcula sumando el stock de seguridad y el consumo medio multiplicado por el lead time. ¿Verdadero o falso?</p>
+                <input type="radio" name="q82" value="true" onclick="checkAnswer('q82', 'true')"> Verdadero
+                <input type="radio" name="q82" value="false" onclick="checkAnswer('q82', 'true')"> Falso
+                <div id="feedback-q82" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El EOQ es un modelo que ayuda a reducir los costos de inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q83" value="true" onclick="checkAnswer('q83', 'true')"> Verdadero
+                <input type="radio" name="q83" value="false" onclick="checkAnswer('q83', 'true')"> Falso
+                <div id="feedback-q83" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La Matriz de Kraljic clasifica los productos según su impacto financiero y complejidad de suministro. ¿Verdadero o falso?</p>
+                <input type="radio" name="q84" value="true" onclick="checkAnswer('q84', 'true')"> Verdadero
+                <input type="radio" name="q84" value="false" onclick="checkAnswer('q84', 'true')"> Falso
+                <div id="feedback-q84" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación mide la velocidad en la que se repone el stock en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q85" value="true" onclick="checkAnswer('q85', 'true')"> Verdadero
+                <input type="radio" name="q85" value="false" onclick="checkAnswer('q85', 'true')"> Falso
+                <div id="feedback-q85" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El inventario físico verifica las existencias de materiales y equipos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q86" value="true" onclick="checkAnswer('q86', 'true')"> Verdadero
+                <input type="radio" name="q86" value="false" onclick="checkAnswer('q86', 'true')"> Falso
+                <div id="feedback-q86" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El método LIFO distribuye primero el lote más reciente de artículos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q87" value="true" onclick="checkAnswer('q87', 'true')"> Verdadero
+                <input type="radio" name="q87" value="false" onclick="checkAnswer('q87', 'true')"> Falso
+                <div id="feedback-q87" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El método FIFO da prioridad a las existencias más antiguas para su procesamiento y envío. ¿Verdadero o falso?</p>
+                <input type="radio" name="q88" value="true" onclick="checkAnswer('q88', 'true')"> Verdadero
+                <input type="radio" name="q88" value="false" onclick="checkAnswer('q88', 'true')"> Falso
+                <div id="feedback-q88" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El stock de seguridad actúa como una red de seguridad en caso de que la demanda supere la cantidad prevista. ¿Verdadero o falso?</p>
+                <input type="radio" name="q89" value="true" onclick="checkAnswer('q89', 'true')"> Verdadero
+                <input type="radio" name="q89" value="false" onclick="checkAnswer('q89', 'true')"> Falso
+                <div id="feedback-q89" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La gestión de compras incluye la adquisición de productos que permiten llevar a cabo la actividad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q90" value="true" onclick="checkAnswer('q90', 'true')"> Verdadero
+                <input type="radio" name="q90" value="false" onclick="checkAnswer('q90', 'true')"> Falso
+                <div id="feedback-q90" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(9)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day9"></p>
+        </div>
+
+        <!-- Día 10 -->
+        <div class="content" id="content-day10">
+            <h2>Día 10: Evaluación y Práctica</h2>
+            <p><strong>Resumen:</strong> Este día se dedicará a evaluar los conocimientos adquiridos y practicar con ejercicios prácticos. Se revisarán los conceptos clave y se realizarán ejercicios de aplicación para asegurar la comprensión de los temas tratados.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Evaluación de conocimientos.</li>
+                    <li>Práctica con ejercicios.</li>
+                    <li>Revisión de conceptos clave.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day10">
+                <label for="check-day10">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de stocks es una disciplina que planifica, regula y supervisa el flujo de bienes en un inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q91" value="true" onclick="checkAnswer('q91', 'true')"> Verdadero
+                <input type="radio" name="q91" value="false" onclick="checkAnswer('q91', 'true')"> Falso
+                <div id="feedback-q91" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El punto de pedido se calcula sumando el stock de seguridad y el consumo medio multiplicado por el lead time. ¿Verdadero o falso?</p>
+                <input type="radio" name="q92" value="true" onclick="checkAnswer('q92', 'true')"> Verdadero
+                <input type="radio" name="q92" value="false" onclick="checkAnswer('q92', 'true')"> Falso
+                <div id="feedback-q92" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El EOQ es un modelo que ayuda a reducir los costos de inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q93" value="true" onclick="checkAnswer('q93', 'true')"> Verdadero
+                <input type="radio" name="q93" value="false" onclick="checkAnswer('q93', 'true')"> Falso
+                <div id="feedback-q93" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La Matriz de Kraljic clasifica los productos según su impacto financiero y complejidad de suministro. ¿Verdadero o falso?</p>
+                <input type="radio" name="q94" value="true" onclick="checkAnswer('q94', 'true')"> Verdadero
+                <input type="radio" name="q94" value="false" onclick="checkAnswer('q94', 'true')"> Falso
+                <div id="feedback-q94" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación mide la velocidad en la que se repone el stock en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q95" value="true" onclick="checkAnswer('q95', 'true')"> Verdadero
+                <input type="radio" name="q95" value="false" onclick="checkAnswer('q95', 'true')"> Falso
+                <div id="feedback-q95" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El inventario físico verifica las existencias de materiales y equipos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q96" value="true" onclick="checkAnswer('q96', 'true')"> Verdadero
+                <input type="radio" name="q96" value="false" onclick="checkAnswer('q96', 'true')"> Falso
+                <div id="feedback-q96" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El método LIFO distribuye primero el lote más reciente de artículos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q97" value="true" onclick="checkAnswer('q97', 'true')"> Verdadero
+                <input type="radio" name="q97" value="false" onclick="checkAnswer('q97', 'true')"> Falso
+                <div id="feedback-q97" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El método FIFO da prioridad a las existencias más antiguas para su procesamiento y envío. ¿Verdadero o falso?</p>
+                <input type="radio" name="q98" value="true" onclick="checkAnswer('q98', 'true')"> Verdadero
+                <input type="radio" name="q98" value="false" onclick="checkAnswer('q98', 'true')"> Falso
+                <div id="feedback-q98" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El stock de seguridad actúa como una red de seguridad en caso de que la demanda supere la cantidad prevista. ¿Verdadero o falso?</p>
+                <input type="radio" name="q99" value="true" onclick="checkAnswer('q99', 'true')"> Verdadero
+                <input type="radio" name="q99" value="false" onclick="checkAnswer('q99', 'true')"> Falso
+                <div id="feedback-q99" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La gestión de compras incluye la adquisición de productos que permiten llevar a cabo la actividad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q100" value="true" onclick="checkAnswer('q100', 'true')"> Verdadero
+                <input type="radio" name="q100" value="false" onclick="checkAnswer('q100', 'true')"> Falso
+                <div id="feedback-q100" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(10)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day10"></p>
+        </div>
+
+        <!-- Día 11 -->
+        <div class="content" id="content-day11">
+            <h2>Día 11: Casos Prácticos</h2>
+            <p><strong>Resumen:</strong> Este día se dedicará a resolver casos prácticos relacionados con la gestión de stocks. Se aplicarán los conceptos aprendidos a situaciones reales para reforzar la comprensión y la capacidad de aplicación de los conocimientos.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Resolución de casos prácticos.</li>
+                    <li>Aplicación de conceptos aprendidos.</li>
+                    <li>Análisis de situaciones reales.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day11">
+                <label for="check-day11">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de stocks es una disciplina que planifica, regula y supervisa el flujo de bienes en un inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q101" value="true" onclick="checkAnswer('q101', 'true')"> Verdadero
+                <input type="radio" name="q101" value="false" onclick="checkAnswer('q101', 'true')"> Falso
+                <div id="feedback-q101" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El punto de pedido se calcula sumando el stock de seguridad y el consumo medio multiplicado por el lead time. ¿Verdadero o falso?</p>
+                <input type="radio" name="q102" value="true" onclick="checkAnswer('q102', 'true')"> Verdadero
+                <input type="radio" name="q102" value="false" onclick="checkAnswer('q102', 'true')"> Falso
+                <div id="feedback-q102" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El EOQ es un modelo que ayuda a reducir los costos de inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q103" value="true" onclick="checkAnswer('q103', 'true')"> Verdadero
+                <input type="radio" name="q103" value="false" onclick="checkAnswer('q103', 'true')"> Falso
+                <div id="feedback-q103" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La Matriz de Kraljic clasifica los productos según su impacto financiero y complejidad de suministro. ¿Verdadero o falso?</p>
+                <input type="radio" name="q104" value="true" onclick="checkAnswer('q104', 'true')"> Verdadero
+                <input type="radio" name="q104" value="false" onclick="checkAnswer('q104', 'true')"> Falso
+                <div id="feedback-q104" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación mide la velocidad en la que se repone el stock en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q105" value="true" onclick="checkAnswer('q105', 'true')"> Verdadero
+                <input type="radio" name="q105" value="false" onclick="checkAnswer('q105', 'true')"> Falso
+                <div id="feedback-q105" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El inventario físico verifica las existencias de materiales y equipos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q106" value="true" onclick="checkAnswer('q106', 'true')"> Verdadero
+                <input type="radio" name="q106" value="false" onclick="checkAnswer('q106', 'true')"> Falso
+                <div id="feedback-q106" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El método LIFO distribuye primero el lote más reciente de artículos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q107" value="true" onclick="checkAnswer('q107', 'true')"> Verdadero
+                <input type="radio" name="q107" value="false" onclick="checkAnswer('q107', 'true')"> Falso
+                <div id="feedback-q107" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El método FIFO da prioridad a las existencias más antiguas para su procesamiento y envío. ¿Verdadero o falso?</p>
+                <input type="radio" name="q108" value="true" onclick="checkAnswer('q108', 'true')"> Verdadero
+                <input type="radio" name="q108" value="false" onclick="checkAnswer('q108', 'true')"> Falso
+                <div id="feedback-q108" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El stock de seguridad actúa como una red de seguridad en caso de que la demanda supere la cantidad prevista. ¿Verdadero o falso?</p>
+                <input type="radio" name="q109" value="true" onclick="checkAnswer('q109', 'true')"> Verdadero
+                <input type="radio" name="q109" value="false" onclick="checkAnswer('q109', 'true')"> Falso
+                <div id="feedback-q109" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La gestión de compras incluye la adquisición de productos que permiten llevar a cabo la actividad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q110" value="true" onclick="checkAnswer('q110', 'true')"> Verdadero
+                <input type="radio" name="q110" value="false" onclick="checkAnswer('q110', 'true')"> Falso
+                <div id="feedback-q110" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(11)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day11"></p>
+        </div>
+
+        <!-- Día 12 -->
+        <div class="content" id="content-day12">
+            <h2>Día 12: Revisión Final</h2>
+            <p><strong>Resumen:</strong> Este día se dedicará a revisar todos los conceptos aprendidos durante el curso. Se realizará una revisión final de los temas tratados y se resolverán dudas para asegurar la comprensión completa de los contenidos.</p>
+            <p><strong>Aspectos clave:</strong>
+                <ul>
+                    <li>Revisión final de conceptos.</li>
+                    <li>Resolución de dudas.</li>
+                    <li>Consolidación de conocimientos.</li>
+                </ul>
+            </p>
+            <div class="check-box">
+                <input type="checkbox" id="check-day12">
+                <label for="check-day12">Marcar como realizado</label>
+            </div>
+            <h3>Ejercicio de Preguntas</h3>
+            <div class="question">
+                <p>1. La gestión de stocks es una disciplina que planifica, regula y supervisa el flujo de bienes en un inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q111" value="true" onclick="checkAnswer('q111', 'true')"> Verdadero
+                <input type="radio" name="q111" value="false" onclick="checkAnswer('q111', 'true')"> Falso
+                <div id="feedback-q111" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>2. El punto de pedido se calcula sumando el stock de seguridad y el consumo medio multiplicado por el lead time. ¿Verdadero o falso?</p>
+                <input type="radio" name="q112" value="true" onclick="checkAnswer('q112', 'true')"> Verdadero
+                <input type="radio" name="q112" value="false" onclick="checkAnswer('q112', 'true')"> Falso
+                <div id="feedback-q112" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>3. El EOQ es un modelo que ayuda a reducir los costos de inventario. ¿Verdadero o falso?</p>
+                <input type="radio" name="q113" value="true" onclick="checkAnswer('q113', 'true')"> Verdadero
+                <input type="radio" name="q113" value="false" onclick="checkAnswer('q113', 'true')"> Falso
+                <div id="feedback-q113" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>4. La Matriz de Kraljic clasifica los productos según su impacto financiero y complejidad de suministro. ¿Verdadero o falso?</p>
+                <input type="radio" name="q114" value="true" onclick="checkAnswer('q114', 'true')"> Verdadero
+                <input type="radio" name="q114" value="false" onclick="checkAnswer('q114', 'true')"> Falso
+                <div id="feedback-q114" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>5. La tasa de rotación mide la velocidad en la que se repone el stock en un período determinado. ¿Verdadero o falso?</p>
+                <input type="radio" name="q115" value="true" onclick="checkAnswer('q115', 'true')"> Verdadero
+                <input type="radio" name="q115" value="false" onclick="checkAnswer('q115', 'true')"> Falso
+                <div id="feedback-q115" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>6. El inventario físico verifica las existencias de materiales y equipos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q116" value="true" onclick="checkAnswer('q116', 'true')"> Verdadero
+                <input type="radio" name="q116" value="false" onclick="checkAnswer('q116', 'true')"> Falso
+                <div id="feedback-q116" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>7. El método LIFO distribuye primero el lote más reciente de artículos. ¿Verdadero o falso?</p>
+                <input type="radio" name="q117" value="true" onclick="checkAnswer('q117', 'true')"> Verdadero
+                <input type="radio" name="q117" value="false" onclick="checkAnswer('q117', 'true')"> Falso
+                <div id="feedback-q117" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>8. El método FIFO da prioridad a las existencias más antiguas para su procesamiento y envío. ¿Verdadero o falso?</p>
+                <input type="radio" name="q118" value="true" onclick="checkAnswer('q118', 'true')"> Verdadero
+                <input type="radio" name="q118" value="false" onclick="checkAnswer('q118', 'true')"> Falso
+                <div id="feedback-q118" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>9. El stock de seguridad actúa como una red de seguridad en caso de que la demanda supere la cantidad prevista. ¿Verdadero o falso?</p>
+                <input type="radio" name="q119" value="true" onclick="checkAnswer('q119', 'true')"> Verdadero
+                <input type="radio" name="q119" value="false" onclick="checkAnswer('q119', 'true')"> Falso
+                <div id="feedback-q119" class="feedback"></div>
+            </div>
+            <div class="question">
+                <p>10. La gestión de compras incluye la adquisición de productos que permiten llevar a cabo la actividad de la empresa. ¿Verdadero o falso?</p>
+                <input type="radio" name="q120" value="true" onclick="checkAnswer('q120', 'true')"> Verdadero
+                <input type="radio" name="q120" value="false" onclick="checkAnswer('q120', 'true')"> Falso
+                <div id="feedback-q120" class="feedback"></div>
+            </div>
+            <button onclick="calculateScore(12)">Calcular Porcentaje de Aciertos</button>
+            <p id="score-day12"></p>
+        </div>
+    </div>
+</body>
+</html>

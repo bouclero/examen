@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionario - Unidad 1: Gestión de Stocks</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+    header { background: #1a73e8; color: white; padding: 20px; text-align: center; }
+    h1 { margin: 0; }
+    .intro { background: white; padding: 20px; margin: 20px auto; max-width: 800px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .start-button { display: block; margin: 30px auto; padding: 12px 24px; background: #1a73e8; color: white; border: none; font-size: 18px; border-radius: 6px; cursor: pointer; }
+    iframe { width: 100%; height: 1800px; border: none; margin-top: 30px; display: none; }
+  </style>
+  <script>
+    function iniciarCuestionario() {
+      document.getElementById('cuestionario').style.display = 'block';
+      document.getElementById('botonInicio').style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>Cuestionario Interactivo</h1>
+  <p>Unidad 1 - Política y Gestión Informatizada de Stock</p>
+</header>
+
+<div class="intro">
+  <p>Bienvenido/a al cuestionario interactivo. Aquí podrás poner a prueba tus conocimientos sobre la gestión de stocks, tal y como hemos trabajado en clase.</p>
+  <p><strong>Duración estimada:</strong> 15-20 minutos<br>
+     <strong>Formato:</strong> Verdadero/falso, opción múltiple, trampas<br>
+     <strong>Corrección:</strong> Inmediata, con explicación de errores</p>
+  <button id="botonInicio" class="start-button" onclick="iniciarCuestionario()">Comenzar el cuestionario</button>
+  <iframe id="cuestionario" src="cuestionario.html"></iframe>
+</div>
+
+</body>
+</html>
